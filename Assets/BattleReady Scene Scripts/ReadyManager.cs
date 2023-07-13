@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ReadyManager : MonoBehaviour
 {
+    public static ReadyManager instance;
     [SerializeField] private Text leadershiptext;
     [SerializeField] private Button battleStart;
     [SerializeField] private Button leadershipAdd;
@@ -32,8 +33,6 @@ public class ReadyManager : MonoBehaviour
     [SerializeField] private Button copyCannedAdd;
     [SerializeField] private GameObject gameob;
     [SerializeField] private Rigidbody2D rigid;
-    [SerializeField] private Image backimg;
-    [SerializeField] private Image copybackimg;
     private bool istrue = false;
     private bool istrue2 = true;
     public float jumpPower;
@@ -45,8 +44,10 @@ public class ReadyManager : MonoBehaviour
     private List<GameObject> listgame = new List<GameObject>();
     private List<Transform> battlegame = new List<Transform>();
     private GameObject[] game;
+    public string str;
     private void Awake()
     {
+        instance = this;
         leadership = GameManager.instanc.leaderShipP;
         maxLeadership = GameManager.instanc.maxLeaderShipP;
         game = GameObject.FindGameObjectsWithTag("Country");
@@ -96,14 +97,14 @@ public class ReadyManager : MonoBehaviour
             JumpMo();   
             yield return new WaitForSeconds(0.8f);
             gameob.GetComponent<BoxCollider2D>().enabled = true;
-            yield return new WaitForSeconds(1.15f);
+            yield return new WaitForSeconds(0.75f);
             for (int i = 0; i < battlegame.Count; i++)
             {
                 battlegame[i].gameObject.SetActive(true);
                 while (!istrue4)
                 {
                     
-                    if (battlegame[i].transform.localScale.x >= -0 && battlegame[i].transform.localScale.y >= 0.4 && !istrue3)
+                    if (battlegame[i].transform.localScale.x >= 0 && battlegame[i].transform.localScale.y >= 0.6 && !istrue3)
                     {
                         battlegame[i].transform.localScale = new Vector3
                         (battlegame[i].transform.localScale.x - 1f * time * Time.deltaTime,
@@ -117,10 +118,8 @@ public class ReadyManager : MonoBehaviour
                 }
                 istrue3 = false;
                 istrue4 = false;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.2f);
             }
-            yield return new WaitForSeconds(0.9f);
-            backimg.transform.position = Vector3.MoveTowards(backimg.transform.position, copybackimg.transform.position, 10f);
             yield return new WaitForSeconds(0.9f);
             CheckCountryName();
             istrue = false;
@@ -132,7 +131,9 @@ public class ReadyManager : MonoBehaviour
         for (int i = 0; i < game.Length; i++) { 
             if(OnMatch.instance != null && game[i].name == OnMatch.instance.str)
             {
-                SceneManager.LoadScene(game[i].name);
+                BackMove.instance.strP = game[i].name;
+                BackMove.instance.FadeNextScene();
+                //SceneManager.LoadScene(game[i].name);
             }
         }
     }

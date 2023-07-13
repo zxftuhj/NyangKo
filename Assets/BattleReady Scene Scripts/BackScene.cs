@@ -22,6 +22,7 @@ public class BackScene : MonoBehaviour
     [SerializeField] private GameObject gameob;
     [SerializeField] private Rigidbody2D rigid;
     [SerializeField] private Text text;
+    [SerializeField] private Canvas backCanvas;
     public float jumpPower;
     private bool istrue = false;
     private bool istrue2 = true;
@@ -35,6 +36,8 @@ public class BackScene : MonoBehaviour
     public void ClickToBack()
     {
         istrue = true;
+        backCanvas.overrideSorting = true;
+        backCanvas.sortingOrder = 6;
         if (istrue)
         {
             StartCoroutine("BackCoroutine");
@@ -49,19 +52,19 @@ public class BackScene : MonoBehaviour
     }
     IEnumerator BackCoroutine()
     {
-        leftdoor.transform.position = Vector3.MoveTowards(leftdoor.transform.position, Copydoor1.transform.position, 6f);
-        rightdoor.transform.position = Vector3.MoveTowards(rightdoor.transform.position, Copydoor2.transform.position, 6f);
-        CatCamp.transform.position = Vector3.MoveTowards(CatCamp.transform.position, CopyCatCamp.transform.position, 6f);
+        leftdoor.transform.position = Vector3.MoveTowards(leftdoor.transform.position, Copydoor1.transform.position, 13f);
+        rightdoor.transform.position = Vector3.MoveTowards(rightdoor.transform.position, Copydoor2.transform.position, 13f);
+        CatCamp.transform.position = Vector3.MoveTowards(CatCamp.transform.position, CopyCatCamp.transform.position, 11f);
         yield return new WaitForSeconds(0.1f);
-        CatCamp2.transform.position = Vector3.MoveTowards(CatCamp2.transform.position, vec, 11f);
+        CatCamp2.transform.position = Vector3.MoveTowards(CatCamp2.transform.position, vec, 12f);
         yield return new WaitForSeconds(0.8f);
         BattleButton.transform.position = Vector3.MoveTowards(BattleButton.transform.position, Copybtn1.transform.position, 9f);
-        JumpMo();
         yield return new WaitForSeconds(0.1f);
+        JumpMo();
         PowerUpButton.transform.position = Vector3.MoveTowards(PowerUpButton.transform.position, Copybtn2.transform.position, 9f);
         yield return new WaitForSeconds(0.7f);
         gameob.GetComponent<BoxCollider2D>().enabled = true;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.6f);
         textButton.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("Main");

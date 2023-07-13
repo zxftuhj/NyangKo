@@ -31,10 +31,15 @@ public class OnMatch : MonoBehaviour
                 str = collision.name;
                 collidedRenderer.sortingOrder = 2;
                 rect = collision.GetComponent<RectTransform>();
-                rect.sizeDelta = new Vector2(232, 76);
-                text.fontSize = 40;
-                leadership.fontSize = 21;
-                leadershipC.fontSize = 30;
+                rect.sizeDelta = new Vector2(391, 124);
+                text.rectTransform.sizeDelta = new Vector2(284, 107);
+                text.fontSize = 64;
+                leadership.rectTransform.sizeDelta = new Vector2(136, 60);
+                leadership.fontSize = 40;
+                leadershipC.rectTransform.sizeDelta = new Vector2(102, 79);
+                leadershipC.fontSize = 52;
+                leadership.rectTransform.position = new Vector3(leadership.rectTransform.position.x, leadership.rectTransform.position.y - 14f, leadership.rectTransform.position.z);
+                leadershipC.rectTransform.position = new Vector3(leadershipC.rectTransform.position.x, leadershipC.rectTransform.position.y - 14f, leadershipC.rectTransform.position.z);
             }
         }
     }
@@ -58,24 +63,20 @@ public class OnMatch : MonoBehaviour
             {
                 collidedRenderer = game[i].gameObject.GetComponent<Canvas>();
                 rect = game[i].GetComponent<RectTransform>();
-                rect.sizeDelta = new Vector2(210, 62);
+                rect.sizeDelta = new Vector2(341, 100);
                 Transform gameob1 = game[i].transform.GetChild(0);
                 text = gameob1.GetComponent<Text>();
                 Transform gameob2 = game[i].transform.GetChild(1);
                 leadership = gameob2.GetComponent<Text>();
                 Transform gameob3 = game[i].transform.GetChild(2);
                 leadershipC = gameob3.GetComponent<Text>();
-                text.fontSize = 33;
-                leadership.fontSize = 20;
-                leadershipC.fontSize = 29;
-                if (i < 2)
-                {
-                    collidedRenderer.sortingOrder = 1;
-                }
-                else if(i < 4)
-                {
-                    collidedRenderer.sortingOrder = 0;
-                }
+                text.rectTransform.sizeDelta = new Vector2(284, 107);
+                text.fontSize = 53;
+                leadership.rectTransform.sizeDelta = new Vector2(136, 60);
+                leadership.fontSize = 33;
+                leadership.rectTransform.sizeDelta = new Vector2(102, 79);
+                leadershipC.fontSize = 40;
+                collidedRenderer.sortingOrder = 1;
             }
         }
     }

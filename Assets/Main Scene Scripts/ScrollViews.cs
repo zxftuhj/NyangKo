@@ -15,7 +15,7 @@ public class ScrollViews : MonoBehaviour
     private int num = 0;
     private float nf = 0f;
     public float copyValue;
-    private static int countryClearCount = 4;
+    private static int countryClearCount = 0;
     public float copyNum;
 
     public int countryClearCountP
@@ -58,15 +58,15 @@ public class ScrollViews : MonoBehaviour
         for (int i = gameOb.Length - 1; i > count; i--)
         {
             gameOb[i].gameObject.SetActive(false);
-            newright = content.offsetMax.x - 274;
+            newright = content.offsetMax.x - 456;//274;
             content.offsetMax = new Vector2(newright, content.offsetMax.y);
-            if (hlg != null)
+            //if (hlg != null)
+            //{
+             //   hlg.spacing -= 7.6f;
+           // }
+            if (num == 0)
             {
-                hlg.spacing -= 7.6f;
-            }
-            if (num == 1)
-            {
-                hlg.spacing -= 11f;
+                hlg.spacing -= 16.5f;
             }
             else if (num > 1)
             {
